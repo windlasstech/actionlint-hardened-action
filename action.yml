@@ -1,9 +1,9 @@
 name: actionlint-action
-description: Run actionlint with a Dockerfile-based, digest-pinned wrapper action.
-author: Windlass Technologies
+description: Run actionlint with a Docker-based, digest-pinned wrapper action.
+author: Windlass Inc.
 branding:
-  icon: check
-  color: blue
+  icon: check-circle
+  color: gray-dark
 inputs:
   paths:
     description: Newline-separated workflow files or directories to lint.
