@@ -77,6 +77,8 @@ if [ "$oneline" = true ]; then
 	set -- "$@" -oneline
 fi
 
+set -- "$@" --
+
 while IFS= read -r line || [ -n "$line" ]; do
 	line=${line%"$cr"}
 	if [ -n "$line" ]; then

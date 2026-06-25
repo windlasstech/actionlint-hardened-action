@@ -35,6 +35,14 @@ jobs:
         with:
           paths: test/fixtures/valid/.github/workflows/*.yml
 
+      - name: Prepare dash-leading path fixture
+        run: cp test/fixtures/dash-leading/.github/workflows/valid.yml ./-dash-leading-valid.yml
+
+      - name: Test dash-leading paths input
+        uses: ./
+        with:
+          paths: -dash-leading-valid.yml
+
       - name: Test directory paths input
         uses: ./
         with:
