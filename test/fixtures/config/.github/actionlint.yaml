@@ -1,0 +1,4 @@
+paths:
+  test/fixtures/config/.github/workflows/ignored.yml:
+    ignore:
+      - 'unexpected key "foo" for "workflow" section.*'
