@@ -30,6 +30,7 @@ A minimal, syntactically valid GitHub Actions workflow.
 
 - **Purpose**: Verify the happy path.
 - **Expected outcome**: `actionlint` exits `0` with no findings.
+- **Paths input behavior**: Used for single-file, glob, multiline `paths`, and empty auto-discovery self-test scenarios.
 - **Directory input behavior**: Passing `test/fixtures/valid/.github/workflows` as a directory is expected to fail the same way as the `actionlint` CLI.
 
 ### `invalid/.github/workflows/invalid.yml`
@@ -39,6 +40,7 @@ A workflow that contains a structural error.
 - **Purpose**: Verify the failure path.
 - **Expected outcome**: `actionlint` exits `1` because of the unknown `foo` key at the workflow level.
 - **Known error**: `unexpected key "foo" for "workflow" section`.
+- **Output behavior**: Used to assert the exact `format`, `no-color`, and `oneline` output produced by the wrapper.
 
 ### `config/.github/workflows/ignored.yml`
 
@@ -68,8 +70,9 @@ A minimal valid workflow file used to create a runtime copy named `-dash-leading
 
 The self-test workflow at `.github/workflows/actionlint-self-test.yml` runs the local action against each fixture and asserts the expected outcome. This ensures that:
 
-- Required inputs map correctly to `actionlint` CLI arguments, including CLI-equivalent failure for directory inputs.
-- Optional inputs such as `config-file`, `ignore`, `shellcheck`, `pyflakes`, `format`, `no-color`, and `oneline` behave as documented.
+- Required inputs map correctly to `actionlint` CLI arguments, including single-file, glob, multiline, empty auto-discovery, dash-leading, and CLI-equivalent directory failure scenarios.
+- Optional inputs such as `config-file`, `ignore`, `shellcheck`, and `pyflakes` behave as documented.
+- Output-shaping inputs such as `format`, `no-color`, and `oneline` produce the expected rendered text without ANSI escape sequences.
 - The wrapper exits with the same code as the underlying `actionlint` process.
 
 ## Adding new fixtures
