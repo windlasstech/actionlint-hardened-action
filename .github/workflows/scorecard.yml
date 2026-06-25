@@ -1,0 +1,23 @@
+name: Scorecard supply-chain security
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  schedule:
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  analysis:
+    permissions:
+      checks: read
+      contents: read
+      id-token: write
+      issues: read
+      pull-requests: read
+      security-events: write
+    uses: windlasstech/.github/.github/workflows/scorecard-reusable.yml@main
