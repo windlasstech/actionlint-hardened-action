@@ -30,6 +30,16 @@ jobs:
         with:
           paths: test/fixtures/valid/.github/workflows/valid.yml
 
+      - name: Test glob paths input
+        uses: ./
+        with:
+          paths: test/fixtures/valid/.github/workflows/*.yml
+
+      - name: Test directory paths input
+        uses: ./
+        with:
+          paths: test/fixtures/valid/.github/workflows
+
       - name: Test invalid fixture
         id: invalid-fixture
         uses: ./
