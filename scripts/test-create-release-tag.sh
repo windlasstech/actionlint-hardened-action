@@ -38,15 +38,15 @@ EOF
 		git config user.email test@example.invalid
 		git config user.name Test User
 		git config commit.gpgsign false
-	if [ "$set_signingkey" = yes ]; then
-		git config user.signingkey DEADBEEF
-		touch "$repo/.signingkey"
-	fi
-	git add README.md CHANGELOG.md
-	git commit -m 'fixture: initial commit' >/dev/null 2>&1
-	if [ -n "$existing_tag" ]; then
-		git tag "$existing_tag"
-	fi
+		if [ "$set_signingkey" = yes ]; then
+			git config user.signingkey DEADBEEF
+			touch "$repo/.signingkey"
+		fi
+		git add README.md CHANGELOG.md
+		git commit -m 'fixture: initial commit' >/dev/null 2>&1
+		if [ -n "$existing_tag" ]; then
+			git tag "$existing_tag"
+		fi
 
 	)
 
@@ -262,9 +262,9 @@ test_extracts_annotation_body_until_next_heading() {
 ")
 	run_script_with_input "$repo" 'y
 ' '' 1.0.0 >/dev/null 2>&1 || return 1
-	repo_recorded_message_has "$repo" '- Added alpha' && \
-	repo_recorded_message_has "$repo" '- Added beta' && \
-	repo_recorded_message_lacks "$repo" '## [0.9.0]'
+	repo_recorded_message_has "$repo" '- Added alpha' &&
+		repo_recorded_message_has "$repo" '- Added beta' &&
+		repo_recorded_message_lacks "$repo" '## [0.9.0]'
 }
 
 test_accepts_yes_to_create_tag() {
@@ -310,8 +310,8 @@ test_opens_editor_and_uses_edited_annotation() {
 	run_script_with_input "$repo" 'e
 y
 ' "$repo/bin/editor" 1.0.0 >/dev/null 2>&1 || return 1
-	repo_recorded_tag_is "$repo" v1.0.0 && \
-	repo_recorded_message_has_marker "$repo"
+	repo_recorded_tag_is "$repo" v1.0.0 &&
+		repo_recorded_message_has_marker "$repo"
 }
 
 test_editor_missing_fails() {
@@ -438,10 +438,10 @@ test_excludes_changelog_link_references() {
 ")
 	run_script_with_input "$repo" 'y
 ' '' 1.0.0 >/dev/null 2>&1 || return 1
-	repo_recorded_message_has "$repo" '- Added alpha' && \
-	repo_recorded_message_has "$repo" '- Added beta' && \
-	repo_recorded_message_lacks "$repo" '[unreleased]:' && \
-	repo_recorded_message_lacks "$repo" '[1.0.0]:'
+	repo_recorded_message_has "$repo" '- Added alpha' &&
+		repo_recorded_message_has "$repo" '- Added beta' &&
+		repo_recorded_message_lacks "$repo" '[unreleased]:' &&
+		repo_recorded_message_lacks "$repo" '[1.0.0]:'
 }
 
 main() {

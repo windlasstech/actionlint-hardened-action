@@ -52,7 +52,7 @@ fi
 
 for part in "$1" "$2" "$3"; do
 	case $part in
-		''|*[!0-9]*)
+		'' | *[!0-9]*)
 			error "invalid version '$version_input'"
 			;;
 	esac
@@ -119,8 +119,7 @@ END {
 		print lines[i]
 	}
 }
-' CHANGELOG.md >"$message_file"
-then
+' CHANGELOG.md >"$message_file"; then
 	:
 else
 	awk_status=$?
@@ -145,14 +144,14 @@ while true; do
 	printf 'Proceed? [e=edit / y=yes / n=no] '
 	read -r choice
 	case "$choice" in
-		y|yes|Y|YES)
+		y | yes | Y | YES)
 			break
 			;;
-		n|no|N|NO)
+		n | no | N | NO)
 			echo 'Aborted.'
 			exit 0
 			;;
-		e|edit|E|EDIT)
+		e | edit | E | EDIT)
 			if [ -z "$EDITOR" ]; then
 				error 'EDITOR (or VISUAL) is not set'
 			fi
