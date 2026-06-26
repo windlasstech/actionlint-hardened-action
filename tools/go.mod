@@ -1,4 +1,4 @@
-module github.com/windlasstech/actionlint-action/tools
+module github.com/windlasstech/actionlint-hardened-action/tools
 
 go 1.26
 
