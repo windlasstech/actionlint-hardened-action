@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "format": "prettier --write \"**/*.{md,yml,yaml,json,jsonc}\" && tools/run-shfmt.sh entrypoint.sh scripts/*.sh tools/*.sh",
+    "format:check": "prettier --check \"**/*.{md,yml,yaml,json,jsonc}\" && tools/run-shfmt.sh --check entrypoint.sh scripts/*.sh tools/*.sh",
+    "hooks:install": "lefthook install",
+    "lint:md": "markdownlint-cli2 \"**/*.md\""
+  },
+  "devDependencies": {
+    "lefthook": "^2.1.9",
+    "markdownlint-cli2": "^0.22.1",
+    "prettier": "^3.8.4"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.9.0",
+      "onFail": "download"
+    }
+  }
+}

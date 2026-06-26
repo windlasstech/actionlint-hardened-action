@@ -108,7 +108,7 @@ input_oneline=${INPUT_ONELINE:-false}
 no_color=$(normalize_bool no-color "$input_no_color")
 oneline=$(normalize_bool oneline "$input_oneline")
 cr=$(printf '\r')
-tmp_dir=/tmp/actionlint-action.$$
+tmp_dir=/tmp/actionlint-hardened-action.$$
 
 mkdir "$tmp_dir"
 trap 'rm -rf "$tmp_dir"' EXIT HUP INT TERM

@@ -1,6 +1,6 @@
 # Test Fixtures
 
-This directory contains fixed test inputs (fixtures) for the `actionlint-action` self-test workflow. They define the behavioral contract of the wrapper action before any production code is implemented.
+This directory contains fixed test inputs (fixtures) for the `actionlint-hardened-action` self-test workflow. They define the behavioral contract of the wrapper action before any production code is implemented.
 
 ## Why fixtures?
 

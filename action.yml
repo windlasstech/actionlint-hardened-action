@@ -1,5 +1,5 @@
-name: actionlint-action
-description: Run actionlint with a Docker-based, digest-pinned wrapper action.
+name: actionlint-hardened
+description: Run actionlint with a Docker-based, digest-pinned, security-hardened wrapper action.
 author: Windlass Inc.
 branding:
   icon: check-circle

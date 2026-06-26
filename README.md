@@ -1,4 +1,23 @@
-# actionlint-action
+<div align="center">
+
+# actionlint-hardened-action
+
+![GitHub License](https://img.shields.io/github/license/windlasstech/actionlint-hardened-action)
+[![SemVer Versioning](https://img.shields.io/badge/version_scheme-SemVer-0097a7)](#versioning)
+[![GitHub Release](https://img.shields.io/github/v/release/windlasstech/actionlint-hardened-action)](https://github.com/windlasstech/actionlint-hardened-action/releases)
+[![GitHub Release Date](https://img.shields.io/github/release-date/windlasstech/actionlint-hardened-action)](https://github.com/windlasstech/actionlint-hardened-action/releases)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg)](https://github.com/windlasstech/.github/blob/main/CODE_OF_CONDUCT.md)
+[![GitHub issues](https://img.shields.io/badge/issue_tracking-GitHub-blue.svg)](https://github.com/windlasstech/actionlint-hardened-action/issues)
+
+[![actionlint-hardened self-test](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/actionlint-self-test.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/actionlint-self-test.yml)
+[![CodeQL](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/github-code-scanning/codeql)
+[![OSV Scanner Full](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/osv-scanner-full.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/osv-scanner-full.yml)
+[![Dependency Review](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/dependency-review.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/windlasstech/actionlint-hardened-action/badge)](https://scorecard.dev/viewer/?uri=github.com/windlasstech/actionlint-hardened-action)
+
+English | [한국어](README.ko.md)
+
+</div>
 
 Docker-based GitHub Action for running [actionlint](https://github.com/rhysd/actionlint) with SHA-pinned images and Dependabot-managed updates. A hardened, reusable wrapper for Windlass workflows and the broader community.
 
@@ -17,7 +36,7 @@ Docker-based GitHub Action for running [actionlint](https://github.com/rhysd/act
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-action@v1
+- uses: windlasstech/actionlint-hardened-action@v1
 ```
 
 For reproducible builds, pin to a full commit SHA:
@@ -27,7 +46,7 @@ For reproducible builds, pin to a full commit SHA:
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-action@<sha>
+- uses: windlasstech/actionlint-hardened-action@<sha>
 ```
 
 Run actionlint against specific workflow files or glob patterns:
@@ -37,7 +56,7 @@ Run actionlint against specific workflow files or glob patterns:
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-action@v1
+- uses: windlasstech/actionlint-hardened-action@v1
   with:
     paths: |
       .github/workflows/*.yml
@@ -51,7 +70,7 @@ Use a custom config file:
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-action@v1
+- uses: windlasstech/actionlint-hardened-action@v1
   with:
     config-file: .github/actionlint.yaml
 ```
@@ -63,24 +82,24 @@ Disable optional integrations:
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-action@v1
+- uses: windlasstech/actionlint-hardened-action@v1
   with:
-    shellcheck: ''
-    pyflakes: ''
+    shellcheck: ""
+    pyflakes: ""
 ```
 
 ## Inputs
 
-| Input | Description | Required | Default |
-|-------|-------------|----------|---------|
-| `paths` | Newline-separated list of workflow files or glob patterns to lint. Empty lets actionlint auto-discover workflows. Directory inputs are passed through to actionlint and fail the same way as the CLI. | No | `''` |
-| `config-file` | Path to an actionlint config file. | No | `''` |
-| `ignore` | Newline-separated list of RE2 patterns passed as repeatable `-ignore` flags. | No | `''` |
-| `shellcheck` | Path or command for ShellCheck integration. Passing an explicit empty string disables it. | No | `shellcheck` |
-| `pyflakes` | Path or command for Pyflakes integration. Passing an explicit empty string disables it. | No | `pyflakes` |
-| `format` | Go template string passed to `-format`. | No | `''` |
-| `no-color` | Disable ANSI color codes in output. | No | `true` |
-| `oneline` | Print one error per line. | No | `false` |
+| Input         | Description                                                                                                                                                                                           | Required | Default      |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------ |
+| `paths`       | Newline-separated list of workflow files or glob patterns to lint. Empty lets actionlint auto-discover workflows. Directory inputs are passed through to actionlint and fail the same way as the CLI. | No       | `''`         |
+| `config-file` | Path to an actionlint config file.                                                                                                                                                                    | No       | `''`         |
+| `ignore`      | Newline-separated list of RE2 patterns passed as repeatable `-ignore` flags.                                                                                                                          | No       | `''`         |
+| `shellcheck`  | Path or command for ShellCheck integration. Passing an explicit empty string disables it.                                                                                                             | No       | `shellcheck` |
+| `pyflakes`    | Path or command for Pyflakes integration. Passing an explicit empty string disables it.                                                                                                               | No       | `pyflakes`   |
+| `format`      | Go template string passed to `-format`.                                                                                                                                                               | No       | `''`         |
+| `no-color`    | Disable ANSI color codes in output.                                                                                                                                                                   | No       | `true`       |
+| `oneline`     | Print one error per line.                                                                                                                                                                             | No       | `false`      |
 
 ### Glob patterns
 
@@ -98,12 +117,12 @@ Brace expansion and recursive globstar are intentionally unsupported to keep `pa
 
 actionlint returns the following exit codes:
 
-| Code | Meaning |
-|------|---------|
-| `0` | No lint problems found. |
-| `1` | Lint problems found. |
-| `2` | Invalid command-line usage. |
-| `3` | Fatal error (e.g. unable to read files). |
+| Code | Meaning                                  |
+| ---- | ---------------------------------------- |
+| `0`  | No lint problems found.                  |
+| `1`  | Lint problems found.                     |
+| `2`  | Invalid command-line usage.              |
+| `3`  | Fatal error (e.g. unable to read files). |
 
 If an input value is invalid (for example, `no-color: maybe`), the wrapper exits with code `2` and prints a clear error message.
 
@@ -120,7 +139,7 @@ actionlint reads `.github/actionlint.yaml` or `.github/actionlint.yml` automatic
 
 ## Versioning
 
-This action uses its own Semantic Versioning independent of the upstream actionlint version. Release notes clearly state the embedded actionlint version, for example: `v1.0.0 - includes actionlint v1.7.12`.
+This action uses its own [Semantic Versioning](https://semver.org/) independent of the upstream actionlint version. Release notes clearly state the embedded actionlint version, for example: `v1.0.0 - includes actionlint v1.7.12`.
 
 ## License
 
