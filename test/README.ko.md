@@ -30,7 +30,7 @@ test/
 
 - **목적**: 정상 경로를 검증합니다.
 - **기대 결과**: `actionlint`가 문제 없이 `0`으로 종료합니다.
-- **paths 입력 동작**: 단일 파일, glob, 여러 줄 `paths`, 빈 값 자동 탐색 자체 테스트 시나리오에 사용합니다.
+- **paths 입력 동작**: 단일 파일, glob, 미매칭 glob, 여러 줄 `paths`, 빈 값 자동 탐색 자체 테스트 시나리오에 사용합니다.
 - **디렉터리 입력 동작**: `test/fixtures/valid/.github/workflows`를 디렉터리로 전달하면 `actionlint` CLI와 동일하게 실패해야 합니다.
 
 ### `invalid/.github/workflows/invalid.yml`
@@ -70,9 +70,9 @@ test/
 
 `.github/workflows/actionlint-self-test.yml`의 자체 테스트 워크플로우는 각 픽스처에 대해 로컬 action을 실행하고 기대 결과를 검증합니다. 이를 통해 다음을 보장합니다.
 
-- 필수 입력을 `actionlint` CLI 인자로 올바르게 매핑하며, 단일 파일, glob, 여러 줄, 빈 값 자동 탐색, dash-leading, CLI-equivalent 디렉터리 실패 시나리오를 검증합니다.
-- `config-file`, `ignore`, `shellcheck`, `pyflakes` 같은 선택 입력이 문서화한 대로 동작합니다.
-- `format`, `no-color`, `oneline` 같은 출력 형식 입력이 ANSI escape sequence 없이 기대한 텍스트를 생성합니다.
+- 필수 입력을 `actionlint` CLI 인자로 올바르게 매핑하며, 단일 파일, glob, 미매칭 glob, 여러 줄, 빈 값 자동 탐색, dash-leading, CLI-equivalent 디렉터리 실패 시나리오를 검증합니다.
+- `config-file`, `ignore`, `shellcheck`, `pyflakes` 같은 선택 입력이 문서화한 대로 동작하며, fake ShellCheck 명령으로 빈 문자열 ShellCheck 비활성화도 검증합니다.
+- `format`, `no-color`, `oneline` 같은 출력 형식 입력이 ANSI escape sequence 없이 기대한 텍스트를 생성하며, `oneline`은 custom `format`과 별도로 검증합니다.
 - wrapper가 내부 `actionlint` 프로세스와 동일한 코드로 종료합니다.
 
 ## 새 픽스처 추가

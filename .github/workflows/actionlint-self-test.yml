@@ -12,6 +12,7 @@ permissions: {}
 jobs:
   self-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
     steps:
@@ -34,6 +35,13 @@ jobs:
         uses: ./
         with:
           paths: test/fixtures/valid/.github/workflows/*.yml
+
+      - name: Test unmatched glob paths input is ignored
+        uses: ./
+        with:
+          paths: |
+            test/fixtures/valid/.github/workflows/*.yml
+            test/fixtures/valid/.github/workflows/*.yaml
 
       - name: Test multiline paths input
         uses: ./
@@ -75,6 +83,17 @@ jobs:
         if: steps.invalid-fixture.outcome != 'failure'
         run: exit 1
 
+      - name: Test config fixture fails without suppression
+        id: config-fixture-without-suppression
+        uses: ./
+        continue-on-error: true
+        with:
+          paths: test/fixtures/config/.github/workflows/ignored.yml
+
+      - name: Assert config fixture failed without suppression
+        if: steps.config-fixture-without-suppression.outcome != 'failure'
+        run: exit 1
+
       - name: Test config-file
         uses: ./
         with:
@@ -87,8 +106,32 @@ jobs:
           ignore: 'unexpected key "foo" for "workflow" section.*'
           paths: test/fixtures/config/.github/workflows/ignored.yml
 
-      - name: Test tool disable
+      - name: Prepare fake ShellCheck
+        run: |
+          cat >shellcheck <<'EOF'
+          #!/bin/sh
+          cat >/dev/null
+          printf '%s\n' '[{"line":2,"column":1,"level":"error","code":9001,"message":"fake shellcheck diagnostic."}]'
+          EOF
+          chmod +x shellcheck
+
+      - name: Test fake ShellCheck reports diagnostics
+        id: fake-shellcheck-enabled
         uses: ./
+        continue-on-error: true
+        with:
+          shellcheck: ./shellcheck
+          pyflakes: ""
+          paths: test/fixtures/valid/.github/workflows/valid.yml
+
+      - name: Assert fake ShellCheck diagnostics failed
+        if: steps.fake-shellcheck-enabled.outcome != 'failure'
+        run: exit 1
+
+      - name: Test ShellCheck disable
+        uses: ./
+        env:
+          PATH: /github/workspace:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         with:
           shellcheck: ""
           pyflakes: ""
@@ -128,6 +171,46 @@ jobs:
 
           if grep -q $'\033' output.txt error.txt; then
             printf 'expected no ANSI escape sequences in output\n' >&2
+            exit 1
+          fi
+
+          if [ -s error.txt ]; then
+            printf 'expected empty stderr, got:\n' >&2
+            cat error.txt >&2
+            exit 1
+          fi
+
+      - name: Assert oneline output
+        run: |
+          set +e
+          docker run --rm \
+            --volume "$PWD:/github/workspace" \
+            --workdir /github/workspace \
+            --env INPUT_NO_COLOR=true \
+            --env INPUT_ONELINE=true \
+            --env INPUT_PATHS=test/fixtures/invalid/.github/workflows/invalid.yml \
+            actionlint-action:self-test >output.txt 2>error.txt
+          status=$?
+          set -e
+
+          if [ "$status" -ne 1 ]; then
+            printf 'expected actionlint exit 1, got %s\n' "$status" >&2
+            cat output.txt >&2
+            cat error.txt >&2
+            exit 1
+          fi
+
+          lines=$(wc -l <output.txt)
+
+          if [ "$lines" -ne 1 ]; then
+            printf 'expected one output line, got %s:\n' "$lines" >&2
+            cat output.txt >&2
+            exit 1
+          fi
+
+          if grep -q '|' output.txt; then
+            printf 'expected oneline output without source excerpt, got:\n' >&2
+            cat output.txt >&2
             exit 1
           fi
 
