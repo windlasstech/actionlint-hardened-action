@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Docker-based reusable GitHub Action wrapping `rhysd/actionlint` with explicit inputs (`paths`, `config-file`, `ignore`, `shellcheck`, `pyflakes`, `format`, `no-color`, `oneline`), including newline-separated glob handling that skips unmatched glob patterns.
+- Docker-based reusable GitHub Action wrapping `rhysd/actionlint` with explicit inputs (`paths`, `config-file`, `ignore`, `shellcheck`, `pyflakes`, `format`, `no-color`, `oneline`), including newline-separated shell-like glob handling that skips unmatched glob patterns, keeps `*`, `?`, and bracket expressions within a single path segment, and requires explicit leading-dot patterns for leading-dot names.
 - SHA-pinned upstream image in `Dockerfile`: `rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667`.
 - Dependabot configuration for Docker base image and GitHub Actions updates.
 - Windlass security reusable workflows: Dependency Review, OSV Scanner (PR and full), and OpenSSF Scorecard.

@@ -82,6 +82,18 @@ Disable optional integrations:
 | `no-color` | Disable ANSI color codes in output. | No | `true` |
 | `oneline` | Print one error per line. | No | `false` |
 
+### Glob patterns
+
+The `paths` input accepts one file path or glob pattern per line. Glob matching is shell-like for the supported pattern syntax, but the input is not evaluated by a shell.
+
+- Supported metacharacters: `*`, `?`, and bracket expressions such as `[ab]` or `[a-z]`.
+- `*`, `?`, and bracket expressions match within a single path segment only; they do not cross `/`.
+- Files or directories whose names start with `.` are matched only by pattern segments that also start with `.`.
+- Unmatched glob patterns are skipped.
+- Shell syntax such as quotes, brace expansion (`*.{yml,yaml}`), extglob, command substitution, and recursive globstar (`**`) is not supported.
+
+Brace expansion and recursive globstar are intentionally unsupported to keep `paths` matching predictable and safe. Brace expansion is a shell expansion feature rather than path matching; use multiple lines instead, for example `*.yml` and `*.yaml`. Recursive globstar semantics vary across shells and settings, so supporting `**` would make it harder to promise shell-like behavior and could include more files than intended.
+
 ## Exit codes
 
 actionlint returns the following exit codes:
