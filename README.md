@@ -13,18 +13,30 @@ Docker-based GitHub Action for running [actionlint](https://github.com/rhysd/act
 ## Usage
 
 ```yaml
+- uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+  with:
+    persist-credentials: false
+
 - uses: windlasstech/actionlint-action@v1
 ```
 
 For reproducible builds, pin to a full commit SHA:
 
 ```yaml
+- uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+  with:
+    persist-credentials: false
+
 - uses: windlasstech/actionlint-action@<sha>
 ```
 
 Run actionlint against specific workflow files or glob patterns:
 
 ```yaml
+- uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+  with:
+    persist-credentials: false
+
 - uses: windlasstech/actionlint-action@v1
   with:
     paths: |
@@ -35,6 +47,10 @@ Run actionlint against specific workflow files or glob patterns:
 Use a custom config file:
 
 ```yaml
+- uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+  with:
+    persist-credentials: false
+
 - uses: windlasstech/actionlint-action@v1
   with:
     config-file: .github/actionlint.yaml
@@ -43,6 +59,10 @@ Use a custom config file:
 Disable optional integrations:
 
 ```yaml
+- uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+  with:
+    persist-credentials: false
+
 - uses: windlasstech/actionlint-action@v1
   with:
     shellcheck: ''
