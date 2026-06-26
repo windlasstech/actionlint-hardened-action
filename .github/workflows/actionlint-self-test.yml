@@ -1,4 +1,4 @@
-name: actionlint-action self-test
+name: actionlint-hardened self-test
 
 on:
   push:
@@ -164,7 +164,7 @@ jobs:
           paths: test/fixtures/valid/.github/workflows/valid.yml
 
       - name: Build local action image for output assertions
-        run: docker build --tag actionlint-action:self-test .
+        run: docker build --tag actionlint-hardened-action:self-test .
 
       - name: Assert no-color/oneline/format output
         run: |
@@ -176,7 +176,7 @@ jobs:
             --env INPUT_ONELINE=true \
             --env 'INPUT_FORMAT={{range $err := .}}{{println $err.Message}}{{end}}' \
             --env INPUT_PATHS=test/fixtures/invalid/.github/workflows/invalid.yml \
-            actionlint-action:self-test >output.txt 2>error.txt
+            actionlint-hardened-action:self-test >output.txt 2>error.txt
           status=$?
           set -e
 
@@ -215,7 +215,7 @@ jobs:
             --env INPUT_NO_COLOR=true \
             --env INPUT_ONELINE=true \
             --env INPUT_PATHS=test/fixtures/invalid/.github/workflows/invalid.yml \
-            actionlint-action:self-test >output.txt 2>error.txt
+            actionlint-hardened-action:self-test >output.txt 2>error.txt
           status=$?
           set -e
 
