@@ -22,5 +22,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Standard OS-specific `.gitignore` rules.
 - Korean README translation (`README.ko.md`).
 
-[unreleased]: https://github.com/windlasstech/actionlint-action/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/windlasstech/actionlint-action/releases/tag/v1.0.0
+[unreleased]: https://github.com/windlasstech/actionlint-hardened-action/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/windlasstech/actionlint-hardened-action/releases/tag/v1.0.0

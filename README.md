@@ -1,19 +1,19 @@
 <div align="center">
 
-# actionlint-action
+# actionlint-hardened-action
 
-![GitHub License](https://img.shields.io/github/license/windlasstech/actionlint-action)
+![GitHub License](https://img.shields.io/github/license/windlasstech/actionlint-hardened-action)
 [![SemVer Versioning](https://img.shields.io/badge/version_scheme-SemVer-0097a7)](#versioning)
-[![GitHub Release](https://img.shields.io/github/v/release/windlasstech/actionlint-action)](https://github.com/windlasstech/actionlint-action/releases)
-[![GitHub Release Date](https://img.shields.io/github/release-date/windlasstech/actionlint-action)](https://github.com/windlasstech/actionlint-action/releases)
+[![GitHub Release](https://img.shields.io/github/v/release/windlasstech/actionlint-hardened-action)](https://github.com/windlasstech/actionlint-hardened-action/releases)
+[![GitHub Release Date](https://img.shields.io/github/release-date/windlasstech/actionlint-hardened-action)](https://github.com/windlasstech/actionlint-hardened-action/releases)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg)](https://github.com/windlasstech/.github/blob/main/CODE_OF_CONDUCT.md)
-[![GitHub issues](https://img.shields.io/badge/issue_tracking-GitHub-blue.svg)](https://github.com/windlasstech/actionlint-action/issues)
+[![GitHub issues](https://img.shields.io/badge/issue_tracking-GitHub-blue.svg)](https://github.com/windlasstech/actionlint-hardened-action/issues)
 
-[![actionlint-action self-test](https://github.com/windlasstech/actionlint-action/actions/workflows/actionlint-self-test.yml/badge.svg)](https://github.com/windlasstech/actionlint-action/actions/workflows/actionlint-self-test.yml)
-[![CodeQL](https://github.com/windlasstech/actionlint-action/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/windlasstech/actionlint-action/actions/workflows/github-code-scanning/codeql)
-[![OSV Scanner Full](https://github.com/windlasstech/actionlint-action/actions/workflows/osv-scanner-full.yml/badge.svg)](https://github.com/windlasstech/actionlint-action/actions/workflows/osv-scanner-full.yml)
-[![Dependency Review](https://github.com/windlasstech/actionlint-action/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/windlasstech/actionlint-action/actions/workflows/dependency-review.yml)
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/windlasstech/actionlint-action/badge)](https://scorecard.dev/viewer/?uri=github.com/windlasstech/actionlint-action)
+[![actionlint-hardened self-test](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/actionlint-self-test.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/actionlint-self-test.yml)
+[![CodeQL](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/github-code-scanning/codeql)
+[![OSV Scanner Full](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/osv-scanner-full.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/osv-scanner-full.yml)
+[![Dependency Review](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/dependency-review.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/windlasstech/actionlint-hardened-action/badge)](https://scorecard.dev/viewer/?uri=github.com/windlasstech/actionlint-hardened-action)
 
 English | [한국어](README.ko.md)
 
@@ -36,7 +36,7 @@ Docker-based GitHub Action for running [actionlint](https://github.com/rhysd/act
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-action@v1
+- uses: windlasstech/actionlint-hardened-action@v1
 ```
 
 For reproducible builds, pin to a full commit SHA:
@@ -46,7 +46,7 @@ For reproducible builds, pin to a full commit SHA:
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-action@<sha>
+- uses: windlasstech/actionlint-hardened-action@<sha>
 ```
 
 Run actionlint against specific workflow files or glob patterns:
@@ -56,7 +56,7 @@ Run actionlint against specific workflow files or glob patterns:
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-action@v1
+- uses: windlasstech/actionlint-hardened-action@v1
   with:
     paths: |
       .github/workflows/*.yml
@@ -70,7 +70,7 @@ Use a custom config file:
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-action@v1
+- uses: windlasstech/actionlint-hardened-action@v1
   with:
     config-file: .github/actionlint.yaml
 ```
@@ -82,7 +82,7 @@ Disable optional integrations:
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-action@v1
+- uses: windlasstech/actionlint-hardened-action@v1
   with:
     shellcheck: ""
     pyflakes: ""
