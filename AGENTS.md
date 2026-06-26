@@ -26,23 +26,23 @@ Docker-based reusable GitHub Action that wraps `rhysd/actionlint` with a SHA-pin
 
 ## WHERE TO LOOK
 
-| Task | Location | Notes |
-|---|---|---|
-| Change action inputs | `action.yml` | Also update `README.md` / `README.ko.md` input tables |
-| Update actionlint version | `Dockerfile` | Pin tag **and** SHA256 digest; Dependabot will propose future updates |
-| Change CLI wrapping logic | `entrypoint.sh` | Handles bool normalization, glob matching, tool disable flags |
-| Add/modify self-test fixtures | `test/fixtures/` | Document in `test/README.md` and add workflow step |
-| Run release tagging | `scripts/create-release-tag.sh` | Requires GPG signing key and CHANGELOG.md section |
-| Release script tests | `scripts/test-create-release-tag.sh` | Pure shell harness using fake `git` binary |
+| Task                          | Location                             | Notes                                                                 |
+| ----------------------------- | ------------------------------------ | --------------------------------------------------------------------- |
+| Change action inputs          | `action.yml`                         | Also update `README.md` / `README.ko.md` input tables                 |
+| Update actionlint version     | `Dockerfile`                         | Pin tag **and** SHA256 digest; Dependabot will propose future updates |
+| Change CLI wrapping logic     | `entrypoint.sh`                      | Handles bool normalization, glob matching, tool disable flags         |
+| Add/modify self-test fixtures | `test/fixtures/`                     | Document in `test/README.md` and add workflow step                    |
+| Run release tagging           | `scripts/create-release-tag.sh`      | Requires GPG signing key and CHANGELOG.md section                     |
+| Release script tests          | `scripts/test-create-release-tag.sh` | Pure shell harness using fake `git` binary                            |
 
 ## CODE MAP
 
-| Symbol | Type | Location | Role |
-|---|---|---|---|
-| `normalize_bool` | function | `entrypoint.sh:4` | Validates `true`/`false` inputs, exits 2 on invalid |
-| `has_glob` / `match_path_segment` / `glob_match_path` | functions | `entrypoint.sh:22` | Shell-like glob matching limited to a single path segment |
-| `create-release-tag.sh` | script | `scripts/create-release-tag.sh` | Creates signed annotated tags from CHANGELOG sections |
-| `test-create-release-tag.sh` | test harness | `scripts/test-create-release-tag.sh` | Fixture-based shell tests for release script |
+| Symbol                                                | Type         | Location                             | Role                                                      |
+| ----------------------------------------------------- | ------------ | ------------------------------------ | --------------------------------------------------------- |
+| `normalize_bool`                                      | function     | `entrypoint.sh:4`                    | Validates `true`/`false` inputs, exits 2 on invalid       |
+| `has_glob` / `match_path_segment` / `glob_match_path` | functions    | `entrypoint.sh:22`                   | Shell-like glob matching limited to a single path segment |
+| `create-release-tag.sh`                               | script       | `scripts/create-release-tag.sh`      | Creates signed annotated tags from CHANGELOG sections     |
+| `test-create-release-tag.sh`                          | test harness | `scripts/test-create-release-tag.sh` | Fixture-based shell tests for release script              |
 
 ## CONVENTIONS
 

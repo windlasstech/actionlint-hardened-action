@@ -18,11 +18,11 @@ scripts/
 
 ## WHERE TO LOOK
 
-| Task | Location | Notes |
-|---|---|---|
-| Create a release tag | `create-release-tag.sh` | Requires `user.signingkey` and a matching `CHANGELOG.md` section |
-| Add a release-tag test case | `test-create-release-tag.sh` | Append a `test_*` function and register it in `main()` |
-| Fake git behavior | `test-create-release-tag.sh` (`make_repo`) | Injected `bin/git` intercepts `config --get user.signingkey` and `tag -s -a -F` |
+| Task                        | Location                                   | Notes                                                                           |
+| --------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------- |
+| Create a release tag        | `create-release-tag.sh`                    | Requires `user.signingkey` and a matching `CHANGELOG.md` section                |
+| Add a release-tag test case | `test-create-release-tag.sh`               | Append a `test_*` function and register it in `main()`                          |
+| Fake git behavior           | `test-create-release-tag.sh` (`make_repo`) | Injected `bin/git` intercepts `config --get user.signingkey` and `tag -s -a -F` |
 
 ## CONVENTIONS
 
