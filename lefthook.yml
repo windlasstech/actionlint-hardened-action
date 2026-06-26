@@ -1,0 +1,20 @@
+pre-commit:
+  commands:
+    prettier:
+      glob: "*.{md,yml,yaml,json,jsonc}"
+      run: pnpm exec prettier --write {staged_files}
+      stage_fixed: true
+
+    markdownlint:
+      glob: "*.md"
+      run: pnpm exec markdownlint-cli2 {staged_files}
+
+    shfmt:
+      glob: "*.sh"
+      run: tools/run-shfmt.sh {staged_files}
+      stage_fixed: true
+
+commit-msg:
+  commands:
+    dco:
+      run: "grep -q '^Signed-off-by: ' {1}"
