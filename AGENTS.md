@@ -1,7 +1,7 @@
 # PROJECT KNOWLEDGE BASE
 
 **Generated:** 12026-06-27
-**Commit:** da623b2
+**Commit:** 2e5bd25
 **Branch:** release/v1.0.0
 
 ## OVERVIEW
@@ -17,6 +17,7 @@ Docker-based reusable GitHub Action that wraps `rhysd/actionlint` with a SHA-pin
 ├── entrypoint.sh           # Runtime wrapper: input normalization, glob handling, CLI invocation
 ├── scripts/                # Release automation and its shell-based test harness
 ├── test/                   # Self-test fixtures and fixture documentation
+├── tools/                  # Go module pinning shfmt for shell formatting
 ├── .github/workflows/      # CI: self-test, Scorecard, OSV Scanner, Dependency Review
 ├── .github/dependabot.yml  # Docker base image + GitHub Actions update checks
 ├── CHANGELOG.md            # Keep a Changelog, Human Era dates
@@ -34,6 +35,7 @@ Docker-based reusable GitHub Action that wraps `rhysd/actionlint` with a SHA-pin
 | Add/modify self-test fixtures | `test/fixtures/`                     | Document in `test/README.md` and add workflow step                    |
 | Run release tagging           | `scripts/create-release-tag.sh`      | Requires GPG signing key and CHANGELOG.md section                     |
 | Release script tests          | `scripts/test-create-release-tag.sh` | Pure shell harness using fake `git` binary                            |
+| Format shell scripts          | `tools/run-shfmt.sh`                 | Pins `mvdan.cc/sh/v3` via the `tools/` Go module                      |
 
 ## CODE MAP
 
@@ -49,6 +51,7 @@ Docker-based reusable GitHub Action that wraps `rhysd/actionlint` with a SHA-pin
 - **Dates in documents**: Use Holocene Era / Human Era year format (e.g., `12026-06-23`).
 - **Bilingual README updates**: When editing any `README.md`, update the corresponding `README.ko.md` in the same directory as part of the same change.
 - **Commits**: DCO sign-off required. Use `git commit -s` for all commits; Lefthook enforces this in the commit-msg hook.
+- **Formatting**: Prettier, markdownlint, and shfmt run via Lefthook pre-commit. Shell scripts use tabs (`shfmt -i 0 -ci`); Markdown and YAML are 2-space indented.
 - **Changelog**: Keep a Changelog 2.0.0 with Human Era release headings. Group `[Unreleased]` entries by category; no empty sections. Release PRs move entries into the new version section and recreate `[Unreleased]`.
 - **PR template**: Fetch the template from `windlasstech/.github` and compose the PR body to match it; do not rely on `gh pr create` to auto-populate it.
 
@@ -85,8 +88,14 @@ sh scripts/create-release-tag.sh 1.0.1
 # Run release-tag tests locally
 sh scripts/test-create-release-tag.sh
 
+# Format shell scripts
+sh tools/run-shfmt.sh entrypoint.sh scripts/*.sh tools/*.sh
+
+# Check shell formatting without writing
+sh tools/run-shfmt.sh --check entrypoint.sh scripts/*.sh tools/*.sh
+
 # Lint shell scripts (if shellcheck is available)
-shellcheck entrypoint.sh scripts/*.sh
+shellcheck entrypoint.sh scripts/*.sh tools/*.sh
 
 # Build the Docker image locally
 docker build -t actionlint-action .
