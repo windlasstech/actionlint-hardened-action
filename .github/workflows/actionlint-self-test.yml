@@ -36,6 +36,32 @@ jobs:
         with:
           paths: test/fixtures/valid/.github/workflows/*.yml
 
+      - name: Prepare shell-like glob fixtures
+        run: |
+          mkdir -p test/fixtures/glob-edge/.github/workflows/nested
+          cp test/fixtures/valid/.github/workflows/valid.yml \
+            test/fixtures/glob-edge/.github/workflows/valid.yml
+          cp test/fixtures/invalid/.github/workflows/invalid.yml \
+            test/fixtures/glob-edge/.github/workflows/.hidden-invalid.yml
+          cp test/fixtures/invalid/.github/workflows/invalid.yml \
+            test/fixtures/glob-edge/.github/workflows/nested/invalid.yml
+
+      - name: Test shell-like glob paths input
+        uses: ./
+        with:
+          paths: test/fixtures/glob-edge/.github/workflows/*.yml
+
+      - name: Test explicit dot glob paths input
+        id: explicit-dot-glob
+        uses: ./
+        continue-on-error: true
+        with:
+          paths: test/fixtures/glob-edge/.github/workflows/.*.yml
+
+      - name: Assert explicit dot glob matched hidden workflow
+        if: steps.explicit-dot-glob.outcome != 'failure'
+        run: exit 1
+
       - name: Test unmatched glob paths input is ignored
         uses: ./
         with:
