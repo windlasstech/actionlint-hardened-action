@@ -10,6 +10,7 @@
 [![GitHub issues](https://img.shields.io/badge/issue_tracking-GitHub-blue.svg)](https://github.com/windlasstech/actionlint-hardened-action/issues)
 
 [![actionlint-hardened self-test](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/actionlint-self-test.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/actionlint-self-test.yml)
+[![Lint](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/lint.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/lint.yml)
 [![OSV Scanner Full](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/osv-scanner-full.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/osv-scanner-full.yml)
 [![Dependency Review](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/dependency-review.yml)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/windlasstech/actionlint-hardened-action/badge)](https://scorecard.dev/viewer/?uri=github.com/windlasstech/actionlint-hardened-action)
