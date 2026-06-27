@@ -11,6 +11,7 @@
 
 [![actionlint-hardened self-test](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/actionlint-self-test.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/actionlint-self-test.yml)
 [![Lint](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/lint.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/lint.yml)
+[![CodeQL](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/github-code-scanning/codeql)
 [![OSV Scanner Full](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/osv-scanner-full.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/osv-scanner-full.yml)
 [![Dependency Review](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/windlasstech/actionlint-hardened-action/actions/workflows/dependency-review.yml)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/windlasstech/actionlint-hardened-action/badge)](https://scorecard.dev/viewer/?uri=github.com/windlasstech/actionlint-hardened-action)
@@ -29,6 +30,9 @@ Docker-based GitHub Action for running [actionlint](https://github.com/rhysd/act
 - Lets Dependabot propose updates when the upstream image changes.
 - [Keeps workflow permissions minimal](https://github.com/windlasstech/.github/blob/main/docs/security/workflow-hardening.md#permission-management) and integrates with [Windlass security scanning workflows](https://github.com/windlasstech/.github#cicd-workflows).
 
+> [!NOTE]
+> This is a [Docker container action](https://docs.github.com/actions/tutorials/use-containerized-services/create-a-docker-container-action), so GitHub Actions builds and runs the container internally. Workflow users do **not** need to install Docker, start a Docker daemon, or add any Docker setup steps before using this action on GitHub-hosted runners.
+
 ## Usage
 
 ```yaml
@@ -39,14 +43,14 @@ Docker-based GitHub Action for running [actionlint](https://github.com/rhysd/act
 - uses: windlasstech/actionlint-hardened-action@v1
 ```
 
-For reproducible builds, pin to a full commit SHA:
+For reproducible builds, pin to a full commit SHA (optional, but **recommended**):
 
 ```yaml
 - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-hardened-action@<sha>
+- uses: windlasstech/actionlint-hardened-action@043a16f2538fe7bee89d8e19bbd5292e925210e0 # v1.0.0
 ```
 
 Run actionlint against specific workflow files or glob patterns:
@@ -56,7 +60,7 @@ Run actionlint against specific workflow files or glob patterns:
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-hardened-action@v1
+- uses: windlasstech/actionlint-hardened-action@043a16f2538fe7bee89d8e19bbd5292e925210e0 # v1.0.0
   with:
     paths: |
       .github/workflows/*.yml
@@ -70,7 +74,7 @@ Use a custom config file:
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-hardened-action@v1
+- uses: windlasstech/actionlint-hardened-action@043a16f2538fe7bee89d8e19bbd5292e925210e0 # v1.0.0
   with:
     config-file: .github/actionlint.yaml
 ```
@@ -82,7 +86,7 @@ Disable optional integrations:
   with:
     persist-credentials: false
 
-- uses: windlasstech/actionlint-hardened-action@v1
+- uses: windlasstech/actionlint-hardened-action@043a16f2538fe7bee89d8e19bbd5292e925210e0 # v1.0.0
   with:
     shellcheck: ""
     pyflakes: ""
